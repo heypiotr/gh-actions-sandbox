@@ -1,0 +1,20 @@
+name: inputs
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: LIMIT env var
+        type: string
+      dry-run:
+        description: DRY_RUN env var
+        type: boolean
+jobs:
+  inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo LIMIT \"$LIMIT\"
+          echo DRY_RUN \"$DRY_RUN\"
+        env:
+          LIMIT: ${{ inputs.limit }}
+          DRY_RUN: ${{ inputs.dry-run && '1' || '' }}
